@@ -1,3 +1,8 @@
+// totural versions:
+// npm install enzyme@3.10.0 --save-dev
+// npm install enzyme-adapter-react-16@1.14.0 --save-dev
+// npm install jest-enzyme@7.0.2
+
 module.exports = {
     "roots": [
       "<rootDir>/src"
