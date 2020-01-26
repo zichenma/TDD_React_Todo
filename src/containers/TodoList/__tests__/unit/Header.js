@@ -1,9 +1,7 @@
 import React from 'react';
-import Enzyme, { shallow } from 'enzyme';
-import Adapter from 'enzyme-adapter-react-16';
+import { shallow } from 'enzyme';
 import Header from '../../componets/Header';
-
-Enzyme.configure({ adapter: new Adapter() });
+import { findTestWrapper } from '../../../../utils/testUtils';
 
 test('Header redner correctly', () => {
     const wrapper = shallow(<Header />); 
@@ -12,18 +10,19 @@ test('Header redner correctly', () => {
 
 test('Header 应该包含一个 input 匡', () => {
     const wrapper = shallow(<Header />); 
-    const inputElem = wrapper.find("[data-test='input']");
+    const inputElem = findTestWrapper(wrapper, 'input');
     expect(inputElem).toExist();
 })
+
 test('Header input inital value should be empty', () => {
     const wrapper = shallow(<Header />);
-    const inputElem = wrapper.find("[data-test='input']");
+    const inputElem = findTestWrapper(wrapper, 'input');
     expect(inputElem.prop('value')).toEqual('');
 
 })
 test('Header input value will change accrding to user input', () => {
     const wrapper = shallow(<Header />);
-    const inputElem = wrapper.find("[data-test='input']");
+    const inputElem = findTestWrapper(wrapper, 'input');
     const userInput = '1234';
     inputElem.simulate('change', {
         target: { value: userInput}
@@ -34,7 +33,7 @@ test('Header input value will change accrding to user input', () => {
 test('Header if input value is empty, nothing should happen after press Enter key', () => {
     const fn = jest.fn();
     const wrapper = shallow(<Header addUndoItem={fn}/>);
-    const inputElem = wrapper.find("[data-test='input']");
+    const inputElem = findTestWrapper(wrapper, 'input');
     wrapper.setState({value : ''});
     inputElem.simulate('keyUp', {
         keyCode: 13 // Enter key
@@ -44,7 +43,7 @@ test('Header if input value is empty, nothing should happen after press Enter ke
 test('Header if input value is NOT empty, fn should be called after press Enter key', () => {
     const fn = jest.fn();
     const wrapper = shallow(<Header addUndoItem={fn}/>);
-    const inputElem = wrapper.find("[data-test='input']");
+    const inputElem = findTestWrapper(wrapper, 'input');
     const userInput = '1234';
     wrapper.setState({value : userInput});
     inputElem.simulate('keyUp', {
@@ -56,12 +55,12 @@ test('Header if input value is NOT empty, fn should be called after press Enter 
 test('Header if input value is NOT empty, shoud be removed', () => {
     const fn = jest.fn();
     const wrapper = shallow(<Header addUndoItem={fn}/>);
-    const inputElem = wrapper.find("[data-test='input']");
+    const inputElem = findTestWrapper(wrapper, 'input');
     const userInput = '1234';
     wrapper.setState({value : userInput});
     inputElem.simulate('keyUp', {
         keyCode: 13 // Enter key
     });
-    const newInputElem = wrapper.find("[data-test='input']");
+    const newInputElem = findTestWrapper(wrapper, 'input');
     expect(newInputElem.prop('value')).toBe('');
 })
