@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Header  from './componets/Header';
+import './style.css';
 
 class TodoList extends Component {
     constructor(props){
