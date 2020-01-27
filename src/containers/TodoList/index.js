@@ -6,20 +6,18 @@ import './style.css';
 class TodoList extends Component {
   constructor(props) {
     super(props);
-    this.addUndoItem = this.addUndoItem.bind(this);
-    this.deleteItem = this.deleteItem.bind(this);
     this.state = {
       undoList: [],
     }
   }
 
-  addUndoItem(value) {
+  addUndoItem = value => {
     this.setState({
-      undoList: [...this.state.undoList, value],
+      undoList: [...this.state.undoList, { status : 'div', value }],
     })
   }
 
-  deleteItem(index) {
+  deleteItem = index => {
     const newList = [...this.state.undoList];
     newList.splice(index, 1);
     this.setState({
@@ -28,12 +26,18 @@ class TodoList extends Component {
     })
   }
 
+  changeStatus = index => {
+    console.log(index)
+  }
+
   render() {
     const { undoList } = this.state;
     return (
       <div>
         <Header addUndoItem={this.addUndoItem} />
-        <UndoList list={undoList} deleteItem={this.deleteItem}/>
+        <UndoList list={undoList} 
+        deleteItem={this.deleteItem} 
+        changeStatus={this.changeStatus}/>
       </div>
     )
   }

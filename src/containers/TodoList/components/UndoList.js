@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 class UndoList extends Component {
   render() {
-    const { list, deleteItem } = this.props;
+    const { list, deleteItem, changeStatus } = this.props;
     return (
       <div className="undo-list">
         <div className="undo-list-title">
@@ -15,10 +15,11 @@ class UndoList extends Component {
               return (
                 <li 
                   data-test="list-item"
-                  key={`${item}-${index}`}
+                  key={index}
                   className="undo-list-item"
+                  onClick={() => changeStatus(index)}
                 >
-                {item}
+                {item.value}
                 <div
                   data-test="delete-item"
                   onClick={() => {deleteItem(index)}}

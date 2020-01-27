@@ -25,16 +25,17 @@ describe('TodoList 组件', () => {
         const content = 'item 1';
         addUndoItem(content);
         expect(wrapper.state('undoList').length).toBe(1);
-        expect(wrapper.state('undoList')[0]).toBe(content);
+        expect(wrapper.state('undoList')[0]).toEqual({status : 'div', value : content});
         addUndoItem(content);
         expect(wrapper.state('undoList').length).toBe(2);
     })
     
-    it('UndoList 组件应该接收 list 和 deleteItem 两个参数', () => {
+    it('UndoList 组件应该接收 list, deleteItem 和 changeStatus 三个参数', () => {
         const wrapper = shallow(<TodoList />);
         const UndoList = wrapper.find('UndoList');
         expect(UndoList.prop('list')).toBeTruthy();
         expect(UndoList.prop('deleteItem')).toBeTruthy();
+        expect(UndoList.prop('changeStatus')).toBeTruthy();
     });
     
     it('deleteItem 方法被调用，undoList 数据项被删除', () => {
@@ -44,6 +45,7 @@ describe('TodoList 组件', () => {
         wrapper.instance().deleteItem(1);
         expect(wrapper.state('undoList')).toEqual([data[0], data[2]]);
     });
+
 })
 
 
