@@ -1,9 +1,9 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import Header from '../../componets/Header';
+import Header from '../../components/Header';
 import { findTestWrapper } from '../../../../utils/testUtils';
 
-test('Header redner correctly', () => {
+test('Header render correctly', () => {
     const wrapper = shallow(<Header />); 
     expect(wrapper).toMatchSnapshot();
 })
