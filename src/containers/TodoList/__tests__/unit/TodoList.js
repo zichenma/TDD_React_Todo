@@ -2,18 +2,18 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import TodoList from '../../index';
 
-test('TodoList initial list is empty', () => {
+it('TodoList 初始化列表为空', () => {
     const wrapper = shallow(<TodoList />); 
     expect(wrapper.state('undoList')).toEqual([]);
 })
 
-test('TodoList should pass an add undolist item method to Header', () => {
+it('TodoList 应该给 Header 传递一个增加 undoList 内容的方法', () => {
     const wrapper = shallow(<TodoList />);
     const Header = wrapper.find('Header'); 
     expect(Header.prop('addUndoItem')).toBeTruthy();
 })
 
-test('Header press enter, uodoList should add item', () => {
+it('addUndoItem 被执行的时候， 应该新增内容', () => {
     const wrapper = shallow(<TodoList />);
     // 这里尽量不要涉及到 Header， 因为这就有点像集成测试：
     // const Header = wrapper.find('Header');
