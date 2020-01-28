@@ -33,8 +33,7 @@ class UndoList extends Component {
                 <div
                   data-test="delete-item"
                   onClick={e => {
-                    // 如果不判断 e 是否存在，则jest会报错，因为 e 没有被jest模拟
-                    e && e.stopPropagation();
+                    e.stopPropagation();
                     deleteItem(index)
                   }}
                   className="undo-list-delete"

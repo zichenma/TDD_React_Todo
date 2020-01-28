@@ -82,7 +82,8 @@ describe('TodoList 组件', () => {
     it('valueChange 方法被调用，undoList 数据项 value 被修改', () => {
         const wrapper = shallow(<TodoList />);
         const data = [
-            { status: 'input', value: '学习Jest'}
+            { status: 'input', value: '学习 Jest'},
+            { status: 'input', value: '学习 TDD'}
         ];
         const value = 'dell lee';
         wrapper.setState({ undoList: data })
