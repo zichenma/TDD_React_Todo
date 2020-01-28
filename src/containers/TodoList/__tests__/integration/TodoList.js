@@ -12,7 +12,6 @@ it(`
     const wrapper = mount(<TodoList />);
     const inputElem = findTestWrapper(wrapper, 'input');
     const content = 'Dell lee';
-    wrapper.setState({value : content });
     inputElem.simulate('change', {
         target: { value: content}
     });
@@ -21,7 +20,7 @@ it(`
     });
     const listItems = findTestWrapper(wrapper, 'list-item');
     expect(listItems.length).toBe(1);
-    expect(listItems.at(0).text()).toContain(content);
+    expect(listItems.text()).toContain(content);
 })
 
 
