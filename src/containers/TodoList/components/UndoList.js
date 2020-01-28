@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 class UndoList extends Component {
   render() {
-    const { list, deleteItem, changeStatus } = this.props;
+    const { list, deleteItem, changeStatus, handleBlur } = this.props;
     return (
       <div className="undo-list">
         <div className="undo-list-title">
@@ -19,7 +19,15 @@ class UndoList extends Component {
                   className="undo-list-item"
                   onClick={() => changeStatus(index)}
                 >
-                {item.value}
+                {
+                  item.status === 'div' ? item.value : (
+                    <input 
+                    data-test="input" 
+                    value={item.value}
+                    onBlur={() => handleBlur(index)}
+                    />
+                  )
+                }
                 <div
                   data-test="delete-item"
                   onClick={() => {deleteItem(index)}}

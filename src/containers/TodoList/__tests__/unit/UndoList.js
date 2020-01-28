@@ -65,5 +65,27 @@ describe('undoList 组件', () => {
     expect(fn).toHaveBeenLastCalledWith(index);
   });
 
+  it('当某一项status是 input 时，展示输入框', () => {
+    const listData = [
+      { status: 'input', value: '学习Jest'}, 
+      { status: 'div', value: '学习TDD'}, 
+      { status: 'div', value: '学习单元测试'}];
+    const wrapper = shallow(<UndoList  list={listData}/>);
+    const inputItems = findTestWrapper(wrapper, "input");
+    expect(inputItems.length).toBe(1);
+  });
+
+  it('当某一个输入框失去焦点时，触发执行，handleBlur 方法', () => {
+    const listData = [
+      { status: 'input', value: '学习Jest'}, 
+      { status: 'div', value: '学习TDD'}, 
+      { status: 'div', value: '学习单元测试'}];
+    const fn = jest.fn();
+    const wrapper = shallow(<UndoList handleBlur={fn} list={listData}/>);
+    const inputElem = findTestWrapper(wrapper, "input");
+    inputElem.simulate('blur');
+    // 因为第一个是 input 所以 index 应该是 0
+    expect(fn).toHaveBeenLastCalledWith(0);
+  });
 })
 
