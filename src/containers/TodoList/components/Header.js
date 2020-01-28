@@ -5,11 +5,10 @@ import { actions } from '../store';
 class Header extends Component {
     
     handleInputKeyUp = e => {
-        const { value } = this.state;
-        const { addUndoItem } = this.props;
+        const { addUndoItem, handleInputChange,  value } = this.props;
         if (e.keyCode === 13 && value) {
             addUndoItem(value);
-            this.setState({...this.state, value : ''})
+            handleInputChange('');
         }
     }
     render() {
