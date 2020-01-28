@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 class UndoList extends Component {
   render() {
-    const { list, deleteItem, changeStatus, handleBlur } = this.props;
+    const { list, deleteItem, changeStatus, handleBlur, valueChange } = this.props;
     return (
       <div className="undo-list">
         <div className="undo-list-title">
@@ -22,15 +22,21 @@ class UndoList extends Component {
                 {
                   item.status === 'div' ? item.value : (
                     <input 
+                    className="undo-list-item-input"
                     data-test="input" 
                     value={item.value}
                     onBlur={() => handleBlur(index)}
+                    onChange={e => valueChange(index, e.target.value)}
                     />
                   )
                 }
                 <div
                   data-test="delete-item"
-                  onClick={() => {deleteItem(index)}}
+                  onClick={e => {
+                    // 如果不判断 e 是否存在，则jest会报错，因为 e 没有被jest模拟
+                    e && e.stopPropagation();
+                    deleteItem(index)
+                  }}
                   className="undo-list-delete"
                 >-</div>
               </li>

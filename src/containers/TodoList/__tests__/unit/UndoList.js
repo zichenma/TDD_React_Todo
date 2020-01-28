@@ -3,12 +3,14 @@ import { shallow } from 'enzyme';
 import UndoList from '../../components/UndoList';
 import { findTestWrapper } from '../../../../utils/testUtils';
 
-// it('UndoList 渲染样式正常', () => {
-//   const wrapper = shallow(<Header />);
-//   expect(wrapper).toMatchSnapshot();
-// });
+
 
 describe('undoList 组件', () => {
+  it('组件渲染样式正常', () => {
+    const wrapper = shallow(<UndoList list={[]} />);
+    expect(wrapper).toMatchSnapshot();
+  });
+
   it('列表数据为空数组时, count 数目为0, 列表无内容', () => {
     const wrapper = shallow(<UndoList list={[]}/>);
     const countElem = findTestWrapper(wrapper, "count");
@@ -87,5 +89,20 @@ describe('undoList 组件', () => {
     // 因为第一个是 input 所以 index 应该是 0
     expect(fn).toHaveBeenLastCalledWith(0);
   });
+
+  it('当某一个输入框变更时，触发执行 valueChange 方法', () => {
+    const listData = [
+      { status: 'input', value: '学习Jest'}
+    ];
+    const value = '学习TDD';
+    const fn = jest.fn();
+    const wrapper = shallow(<UndoList valueChange={fn} list={listData}/>);
+    const inputElem = findTestWrapper(wrapper, "input");
+    inputElem.simulate('change', {
+      target: {value}
+    });
+    expect(fn).toHaveBeenLastCalledWith(0, value);
+  });
+
 })
 

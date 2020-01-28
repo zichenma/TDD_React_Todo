@@ -80,3 +80,13 @@ body {
     border-radius: 50%;
     cursor: pointer;
 }
+
+.undo-list-item-input {
+    position: relative;
+    top: -1px;
+    width: 100px;
+    line-height: 22px;
+    font-size: 14px;
+    text-indent: 10px;
+    outline: none;
+}

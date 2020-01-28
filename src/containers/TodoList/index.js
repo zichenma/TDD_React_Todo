@@ -46,7 +46,35 @@ class TodoList extends Component {
   }
 
   handleBlur = index => {
+    const newList = this.state.undoList.map((item, listIndex) => {
+      if (index === listIndex) {
+        return {
+          ...item,
+          status: 'div'
+        }
+      }
+      return item;
+    })
+    this.setState({
+      ...this.state,
+      undoList : newList
+    })
+  }
 
+  valueChange = (index, value) => {
+    const newList = this.state.undoList.map((item, listIndex) => {
+      if (index === listIndex) {
+        return {
+          ...item,
+          value
+        }
+      }
+      return item;
+    })
+    this.setState({
+      ...this.state,
+      undoList : newList
+    })
   }
 
   render() {
@@ -58,6 +86,7 @@ class TodoList extends Component {
         deleteItem={this.deleteItem} 
         changeStatus={this.changeStatus}
         handleBlur={this.handleBlur}
+        valueChange={this.valueChange}
         />
       </div>
     )
