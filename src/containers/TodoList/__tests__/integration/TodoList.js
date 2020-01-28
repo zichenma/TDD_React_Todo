@@ -27,5 +27,22 @@ it(`
     expect(listItems.length).toBe(1);
     expect(listItems.text()).toContain(content);
 })
-
+ 
+it(`
+    1. 用户打开页面
+    2. 应该展示接口返回的数据
+`, () => {
+    const wrapper = mount(
+        <Provider store={store}><TodoList /></Provider>
+    );
+    // 当页面渲染完毕时，还没有拿到异步的数据，所以 listItems.length 应该是 0，
+    // 此时为了验证拿到异步数据后的效果，需要加一个 setTimeout， 这样 listItems.length 
+    // 的长度才会变成 1，从而通过测试
+    setTimeout(() => {
+        const listItems = findTestWrapper(wrapper, 'list-item');
+        expect(listItems.length).toBe(1);
+    }, 100);  
+   
+  
+})
 
