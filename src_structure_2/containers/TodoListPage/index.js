@@ -1,6 +1,13 @@
 import React, { Component } from 'react';
-import Header from './components/Header'
-import UndoList from './components/UndoList'
+// this is for first structure
+// import Header from './components/Header'
+// import UndoList from './components/UndoList'
+
+// this is for the second structure
+import Header from '../../components/TodoListHeader';
+import UndoList from '../../components/TodoListUndoList';
+//
+
 import axios from 'axios'
 import './style.css';
 
